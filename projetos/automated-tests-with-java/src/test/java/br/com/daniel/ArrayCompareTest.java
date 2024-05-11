@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 
-public class ArrayCompareTest {
+class ArrayCompareTest {
 
     @Test
     void test() {

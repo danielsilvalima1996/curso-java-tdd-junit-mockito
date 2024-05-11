@@ -1,4 +1,4 @@
-package br.com.daniel;
+package br.com.daniel.math;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,8 +11,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import br.com.daniel.SimpleMath;
+
 @DisplayName("Test Math Operation in SimpleMath Class")
-class SimpleMathTest {
+class SimpleMathTestS3 {
 
 	SimpleMath math;
 
