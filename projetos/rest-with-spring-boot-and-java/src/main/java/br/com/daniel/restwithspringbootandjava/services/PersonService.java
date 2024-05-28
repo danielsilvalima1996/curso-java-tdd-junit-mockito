@@ -1,11 +1,13 @@
 package br.com.daniel.restwithspringbootandjava.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.daniel.restwithspringbootandjava.exceptions.ResourceConflictException;
 import br.com.daniel.restwithspringbootandjava.exceptions.ResourceNotFoundException;
 import br.com.daniel.restwithspringbootandjava.model.Person;
 import br.com.daniel.restwithspringbootandjava.repositories.PersonRepository;
@@ -30,13 +32,21 @@ public class PersonService {
 
     public List<Person> findAll() {
 
-        logger.info("Finding all persons");
+        logger.info("Finding all people");
 
         return repository.findAll();
     }
 
     public Person create(Person person) {
         logger.info("Creating one person!");
+
+        Optional<Person> savedPerson = repository.findByEmail(person.getEmail());
+
+        if(savedPerson.isPresent()) {
+            throw new ResourceConflictException("Person already exist with given e-mail: " 
+                + person.getEmail());
+        }
+
         return repository.save(person);
     }
 
