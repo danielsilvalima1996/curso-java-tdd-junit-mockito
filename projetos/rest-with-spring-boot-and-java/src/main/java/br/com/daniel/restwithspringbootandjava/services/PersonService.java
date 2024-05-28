@@ -13,6 +13,8 @@ import br.com.daniel.restwithspringbootandjava.repositories.PersonRepository;
 @Service
 public class PersonService {
 
+    private static final String NO_RECORD_FOUND_FOR_THIS_ID = "No record found for this ID";
+
     @Autowired
     PersonRepository repository;
     
@@ -23,7 +25,7 @@ public class PersonService {
         logger.info("Finding one person By ID");
 
         return repository.findById(id).orElseThrow(
-            () -> new ResourceNotFoundException("No record found for this ID"));
+            () -> new ResourceNotFoundException(NO_RECORD_FOUND_FOR_THIS_ID));
     }
 
     public List<Person> findAll() {
@@ -42,7 +44,7 @@ public class PersonService {
         logger.info("Updating one person!");
 
         var entity = repository.findById(person.getId()).orElseThrow(
-            () -> new ResourceNotFoundException("No record found for this ID"));
+            () -> new ResourceNotFoundException(NO_RECORD_FOUND_FOR_THIS_ID));
 
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
@@ -55,7 +57,7 @@ public class PersonService {
     public void delete(Long id) {
         logger.info("Deleting one person!");
         var entity = repository.findById(id).orElseThrow(
-            () -> new ResourceNotFoundException("No record found for this ID"));
+            () -> new ResourceNotFoundException(NO_RECORD_FOUND_FOR_THIS_ID));
         repository.delete(entity);
     }
 
