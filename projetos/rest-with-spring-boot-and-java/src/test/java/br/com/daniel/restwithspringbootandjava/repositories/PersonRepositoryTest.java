@@ -12,12 +12,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import br.com.daniel.restwithspringbootandjava.integrationtests.testcontainers.AbstractIntegrationTest;
 import br.com.daniel.restwithspringbootandjava.model.Person;
 
 @DataJpaTest
-class PersonRepositoryTest {
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+class PersonRepositoryTest extends AbstractIntegrationTest {
 
     @Autowired
     private PersonRepository repository;
@@ -31,7 +34,7 @@ class PersonRepositoryTest {
         firstName = "Daniel";
         lastName = "Lima";
         person0 = new Person(firstName, lastName,
-        "Guarulhos - SP", "Male", "dsl15021996@gmail.com");
+                "Guarulhos - SP", "Male", "dsl15021996@gmail.com");
     }
 
     @DisplayName("Given Person Object When Save Then Return Saved Person")
